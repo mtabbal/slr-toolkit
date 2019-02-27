@@ -22,7 +22,6 @@ import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory
 import de.tudresden.slr.model.bibtex.Document;
 import de.tudresden.slr.model.bibtex.provider.BibtexItemProviderAdapterFactory;
 import de.tudresden.slr.model.taxonomy.Model;
-import de.tudresden.slr.model.taxonomy.util.ModelComparer;
 import de.tudresden.slr.model.taxonomy.util.TaxonomyStandaloneParser;
 
 public class ModelRegistry extends Observable {
@@ -30,7 +29,6 @@ public class ModelRegistry extends Observable {
 	private Model activeTaxonomy;
 	private AdapterFactoryEditingDomain sharedEditingDomain;
 	private TaxonomyStandaloneParser taxonomyParser = new TaxonomyStandaloneParser();
-	private ModelComparer modelComparer = new ModelComparer();
 
 	public ModelRegistry() {
 		createEditingDomain();
@@ -73,7 +71,10 @@ public class ModelRegistry extends Observable {
 
 	public void setActiveDocument(Document document) {
 		if (activeDocument != document) {
-			setTaxonomyFile(getTaxonomyFileInProject(document.eResource()));
+			Optional<Model> currentModel = getActiveTaxonomy();
+			Model model =  taxonomyParser.parseTaxonomyFile(getTaxonomyFileInProject(document.eResource()));
+			if(currentModel.isPresent() && !model.getResource().getURI().equals(currentModel.get().eResource().getURI()))
+				setActiveTaxonomy(model);
 			
 			activeDocument = document;
 			setChanged();
@@ -91,11 +92,6 @@ public class ModelRegistry extends Observable {
 	}
 
 	public void setActiveTaxonomy(Model taxonomy) {
-		//Comparing large models is rather expensive, maybe we can avoid it more often.
-		if(activeTaxonomy == taxonomy || modelComparer.equals(activeTaxonomy, taxonomy)){
-			return;
-		}
-
 		activeTaxonomy = taxonomy;
 		setChanged();
 		notifyObservers(activeTaxonomy);
@@ -116,16 +112,19 @@ public class ModelRegistry extends Observable {
 	 * @return Taxonomy file handle or null
 	 */
 	private IFile getTaxonomyFileInProject(Resource resource){
-		IFile[] containers = ResourcesPlugin.getWorkspace().getRoot().findFilesForLocationURI(getFileFromResource(resource).getLocationURI());
 		IFile file = null;
-		if(containers != null && containers.length > 0){
-			IProject project = containers[0].getProject();
-			if(project != null){
-				try {
-					//TODO: project.members() only returns immediate children, would need recursive function to walk through project.
-					file = (IFile) Arrays.stream(project.members()).filter(x -> x.getType() == IResource.FILE && x.getFileExtension().equals("taxonomy")).reduce((a, b) -> b).orElse(null);
-				} catch (CoreException e) {
-					e.printStackTrace();
+		IFile ffr = getFileFromResource(resource);
+		if(ffr != null) {
+			IFile[] containers = ResourcesPlugin.getWorkspace().getRoot().findFilesForLocationURI(ffr.getLocationURI());
+			if(containers != null && containers.length > 0){
+				IProject project = containers[0].getProject();
+				if(project != null){
+					try {
+						//TODO: project.members() only returns immediate children, would need recursive function to walk through project.
+						file = (IFile) Arrays.stream(project.members()).filter(x -> x.getType() == IResource.FILE && x.getFileExtension().equals("taxonomy")).reduce((a, b) -> b).orElse(null);
+					} catch (CoreException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}

@@ -99,11 +99,11 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setName(String newName) {
 		String oldName = name;
-		name = newName;
+		name = newName != null ? newName.trim() : newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TaxonomyPackage.TERM__NAME, oldName, name));
 	}
@@ -118,23 +118,6 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term {
 			subclasses = new EObjectContainmentEList<Term>(Term.class, this, TaxonomyPackage.TERM__SUBCLASSES);
 		}
 		return subclasses;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public int hashCode() {
-		final int prime = 31;
-		int hash = 1;
-		if (eContainer instanceof Term) {
-			int parentHash = eContainer.hashCode();
-			hash = prime * hash + parentHash ^ (parentHash >> 32);
-		}
-		int nameHash = name.hashCode();
-		hash = prime * hash + nameHash ^ (nameHash >> 32);
-		return hash;
 	}
 
 	/**
@@ -214,7 +197,8 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TaxonomyPackage.TERM__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+				return name != null;
+				//return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TaxonomyPackage.TERM__SUBCLASSES:
 				return subclasses != null && !subclasses.isEmpty();
 		}

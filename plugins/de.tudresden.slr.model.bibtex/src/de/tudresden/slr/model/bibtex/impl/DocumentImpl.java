@@ -54,14 +54,16 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  * <em>File</em>}</li>
  * <li>{@link de.tudresden.slr.model.bibtex.impl.DocumentImpl#getCites
  * <em>Cites</em>}</li>
+ * <li>{@link de.tudresden.slr.model.bibtex.impl.DocumentImpl#getLine
+ * <em>Line</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class DocumentImpl extends MinimalEObjectImpl.Container implements Document {
 	/**
-	 * The cached value of the '{@link #getAuthors() <em>Authors</em>}'
-	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getAuthors() <em>Authors</em>}' attribute
+	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getAuthors()
 	 * @generated
@@ -80,8 +82,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected static final String ABSTRACT_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getAbstract() <em>Abstract</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getAbstract()
 	 * @generated
@@ -90,8 +92,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected String abstract_ = ABSTRACT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getYear() <em>Year</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getYear() <em>Year</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getYear()
 	 * @generated
@@ -100,8 +102,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected static final String YEAR_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getYear() <em>Year</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getYear() <em>Year</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getYear()
 	 * @generated
@@ -110,8 +112,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected String year = YEAR_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getMonth() <em>Month</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getMonth() <em>Month</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getMonth()
 	 * @generated
@@ -120,8 +122,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected static final String MONTH_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getMonth() <em>Month</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getMonth() <em>Month</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getMonth()
 	 * @generated
@@ -130,8 +132,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected String month = MONTH_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTitle()
 	 * @generated
@@ -140,8 +142,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected static final String TITLE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTitle()
 	 * @generated
@@ -210,9 +212,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected String url = URL_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getUnparsedAuthors()
-	 * <em>Unparsed Authors</em>}' attribute. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The default value of the '{@link #getUnparsedAuthors() <em>Unparsed
+	 * Authors</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getUnparsedAuthors()
 	 * @generated
@@ -221,9 +222,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected static final String UNPARSED_AUTHORS_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getUnparsedAuthors()
-	 * <em>Unparsed Authors</em>}' attribute. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The cached value of the '{@link #getUnparsedAuthors() <em>Unparsed
+	 * Authors</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getUnparsedAuthors()
 	 * @generated
@@ -232,8 +232,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected String unparsedAuthors = UNPARSED_AUTHORS_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTaxonomy() <em>Taxonomy</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTaxonomy() <em>Taxonomy</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTaxonomy()
 	 * @generated
@@ -242,8 +242,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected Model taxonomy;
 
 	/**
-	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getType()
 	 * @generated
@@ -252,8 +252,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected static final String TYPE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getType()
 	 * @generated
@@ -262,8 +262,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected String type = TYPE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getFile() <em>File</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getFile() <em>File</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getFile()
 	 * @generated
@@ -272,8 +272,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected static final String FILE_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getFile() <em>File</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getFile() <em>File</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getFile()
 	 * @generated
@@ -282,8 +282,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected String file = FILE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getCites() <em>Cites</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getCites() <em>Cites</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getCites()
 	 * @generated
@@ -292,14 +292,26 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	protected static final int CITES_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getCites() <em>Cites</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getCites() <em>Cites</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getCites()
 	 * @generated
 	 * @ordered
 	 */
 	protected int cites = CITES_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLine() <em>Line</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getLine()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int LINE_EDEFAULT = 0;
+
+	protected int line;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -636,6 +648,29 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 	 * @generated
 	 */
 	@Override
+	public int getLine() {
+		return line;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setLine(int newLine) {
+		int oldLine = line;
+		line = newLine;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BibtexPackage.DOCUMENT__LINE, oldLine, line));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case BibtexPackage.DOCUMENT__AUTHORS:
@@ -666,6 +701,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 			return getFile();
 		case BibtexPackage.DOCUMENT__CITES:
 			return getCites();
+		case BibtexPackage.DOCUMENT__LINE:
+			return getLine();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -719,6 +756,9 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 		case BibtexPackage.DOCUMENT__CITES:
 			setCites((Integer) newValue);
 			return;
+		case BibtexPackage.DOCUMENT__LINE:
+			setLine((Integer) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -770,6 +810,9 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 		case BibtexPackage.DOCUMENT__CITES:
 			setCites(CITES_EDEFAULT);
 			return;
+		case BibtexPackage.DOCUMENT__LINE:
+			setLine(LINE_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -785,30 +828,42 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 		case BibtexPackage.DOCUMENT__AUTHORS:
 			return authors != null && !authors.isEmpty();
 		case BibtexPackage.DOCUMENT__ABSTRACT:
-			return ABSTRACT_EDEFAULT == null ? abstract_ != null : !ABSTRACT_EDEFAULT.equals(abstract_);
+			//return ABSTRACT_EDEFAULT == null ? abstract_ != null : !ABSTRACT_EDEFAULT.equals(abstract_);
+			return abstract_ != null;
 		case BibtexPackage.DOCUMENT__YEAR:
-			return YEAR_EDEFAULT == null ? year != null : !YEAR_EDEFAULT.equals(year);
+			//return YEAR_EDEFAULT == null ? year != null : !YEAR_EDEFAULT.equals(year);
+			return year != null;
 		case BibtexPackage.DOCUMENT__MONTH:
-			return MONTH_EDEFAULT == null ? month != null : !MONTH_EDEFAULT.equals(month);
+			//return MONTH_EDEFAULT == null ? month != null : !MONTH_EDEFAULT.equals(month);
+			return month != null;
 		case BibtexPackage.DOCUMENT__TITLE:
-			return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
+			//return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
+			return title != null;
 		case BibtexPackage.DOCUMENT__KEY:
-			return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
+			//return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
+			return key != null;
 		case BibtexPackage.DOCUMENT__DOI:
-			return DOI_EDEFAULT == null ? doi != null : !DOI_EDEFAULT.equals(doi);
+			//return DOI_EDEFAULT == null ? doi != null : !DOI_EDEFAULT.equals(doi);
+			return doi != null;
 		case BibtexPackage.DOCUMENT__URL:
-			return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
+			//return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
+			return url != null;
 		case BibtexPackage.DOCUMENT__UNPARSED_AUTHORS:
-			return UNPARSED_AUTHORS_EDEFAULT == null ? unparsedAuthors != null
-					: !UNPARSED_AUTHORS_EDEFAULT.equals(unparsedAuthors);
+			//return UNPARSED_AUTHORS_EDEFAULT == null ? unparsedAuthors != null
+			//		: !UNPARSED_AUTHORS_EDEFAULT.equals(unparsedAuthors);
+			return unparsedAuthors != null;
 		case BibtexPackage.DOCUMENT__TAXONOMY:
 			return taxonomy != null;
 		case BibtexPackage.DOCUMENT__TYPE:
-			return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			//return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			return type != null;
 		case BibtexPackage.DOCUMENT__FILE:
-			return FILE_EDEFAULT == null ? file != null : !FILE_EDEFAULT.equals(file);
+			//return FILE_EDEFAULT == null ? file != null : !FILE_EDEFAULT.equals(file);
+			return file != null;
 		case BibtexPackage.DOCUMENT__CITES:
 			return cites != CITES_EDEFAULT;
+		case BibtexPackage.DOCUMENT__LINE:
+			return line != LINE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -823,7 +878,7 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (authors: ");
 		result.append(authors);
 		result.append(", abstract: ");
@@ -848,6 +903,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
 		result.append(file);
 		result.append(", cites: ");
 		result.append(cites);
+		result.append(", line: ");
+		result.append(line);
 		result.append(')');
 		return result.toString();
 	}
