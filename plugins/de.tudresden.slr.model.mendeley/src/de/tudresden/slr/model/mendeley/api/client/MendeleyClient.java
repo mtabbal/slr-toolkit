@@ -42,6 +42,8 @@ import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpContent;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
+import com.google.api.client.http.HttpResponse;
+import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.http.apache.ApacheHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -82,12 +84,12 @@ public class MendeleyClient {
     /**
      * Client ID of client credential.
      */
-    private static final String client_id = "4335";
+    private static final String client_id = "6710";
 
     /**
      * Client secret of client credential.
      */
-    private static final String client_secret = "sSFcbUA38RS9Cpm7";
+    private static final String client_secret = "zKmwqZ5wOiXL7ldU";
 
     /**
      * Redirect URI
@@ -613,7 +615,7 @@ public class MendeleyClient {
 	              .setRedirectUri("https://localhost")
 	              .setGrantType("authorization_code")
 	              .setClientAuthentication(
-	                  new BasicAuthentication("4335", "sSFcbUA38RS9Cpm7")).execute();
+	                  new BasicAuthentication(this.client_id, this.client_secret)).execute();
 	      
 	      this.access_token = response.getAccessToken();
 	      this.refresh_token = response.getRefreshToken();
@@ -654,7 +656,7 @@ public class MendeleyClient {
 	          	  .set("redirect_uri", "https://localhost")
 	              .setGrantType("refresh_token")
 	              .setClientAuthentication(
-	                  new BasicAuthentication("4335", "sSFcbUA38RS9Cpm7"));
+	                  new BasicAuthentication(this.client_id, this.client_secret));
 	      
 	      TokenResponse response = request.execute();
 	      
@@ -844,11 +846,20 @@ public class MendeleyClient {
 			patch_request = requestFactory.buildPostRequest(gen_url, content);
 			patch_request.getHeaders().setAuthorization("Bearer " + access_token);
 			patch_request.getHeaders().setContentType("application/vnd.mendeley-document.1+json");
-			String rawResponse = patch_request.execute().parseAsString();
-			document = gson.fromJson(rawResponse, MendeleyDocument.class);
+			patch_request.getHeaders().setAccept("application/vnd.mendeley-document.1+json");
+			try {
+				HttpResponse response = patch_request.execute();
+				String rawResponse = response.parseAsString();
+				document = gson.fromJson(rawResponse, MendeleyDocument.class);
+				
+			} catch (HttpResponseException e ) {
+				e.printStackTrace();
+			}
+			
 		} catch (IOException e ) {
 			e.printStackTrace();
-		}
+		} 
+		
 
 		return document;
     }

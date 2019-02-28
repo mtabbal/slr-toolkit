@@ -83,15 +83,20 @@ public class MendeleyOAuthDialog extends Dialog {
     				URL aURL;
     				
     				try {
-    					aURL = new URL(event.location);
-    					// if login was successful the redirection will change the location to 'localhost'
-    					if(aURL.getHost().equals("localhost")){
-    						// Capture the authorization code
-    						String auth_code = aURL.getQuery().replaceAll("code=", "");
-    						mendeley_client.setAuth_code(auth_code);
-    						mendeley_client.requestAccessToken(auth_code);
-    					        
-    					    close();
+    					if(event.location != "") {
+    						aURL = new URL(event.location);
+        					// if login was successful the redirection will change the location to 'localhost'
+        					if(aURL.getHost().equals("localhost")){
+        						// Capture the authorization code
+        						String auth_code = aURL.getQuery().replaceAll("code=", "");
+        						mendeley_client.setAuth_code(auth_code);
+        						mendeley_client.requestAccessToken(auth_code);
+        					        
+        					    close();
+        					}
+    					}
+    					else {
+    						browser.setUrl(mendeley_client.getAuthURL());
     					}
     				} catch (MalformedURLException e) {
     					e.printStackTrace();
@@ -105,7 +110,8 @@ public class MendeleyOAuthDialog extends Dialog {
     			}
     		});
     		
-    		browser.setUrl("https://api.mendeley.com/oauth/authorize?client_id=4335&redirect_uri=https:%2F%2Flocalhost&response_type=code&scope=all");
+    		//browser.setUrl("https://api.mendeley.com/oauth/authorize?client_id=6710&redirect_uri=https:%2F%2Flocalhost&response_type=code&scope=all");
+            browser.setUrl(mendeley_client.getAuthURL());
             return container;
     	}catch(SWTError e) {
     		Composite container = (Composite) super.createDialogArea(parent);

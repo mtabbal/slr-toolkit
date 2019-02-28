@@ -123,6 +123,7 @@ public class ContextWizardHandler extends AbstractHandler {
 			            	if(loggedIn & isReady) {
 			            		WizardDialog wizardDialog = new WizardDialog(window.getShell(),
 							            new MSyncWizard(file.getLocationURI()));
+			            		wizardDialog.open();
 //						        if (wizardDialog.open() == Window.OK) {
 //						            
 //						        } else {
