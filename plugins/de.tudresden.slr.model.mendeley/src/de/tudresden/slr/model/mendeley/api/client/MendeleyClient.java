@@ -11,6 +11,8 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.http.*;
+import com.google.api.client.http.*;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -257,6 +259,8 @@ public class MendeleyClient {
     	HttpURLConnection resource_cxn = (HttpURLConnection)(new URL(resource_url).openConnection());
         resource_cxn.addRequestProperty("Authorization", "Bearer " + this.access_token);
         resource_cxn.setRequestMethod("GET");
+        resource_cxn.setRequestProperty("Content-Type", "application/vnd.mendeley-annotation.1+json");
+        //resource_cxn.setRequestProperty("Accept", "application/vnd.mendeley-annotation.1+json");
         
         InputStream resource = resource_cxn.getInputStream();
         

@@ -18,6 +18,7 @@ import org.jbibtex.TokenMgrException;
 import de.tudresden.slr.model.mendeley.api.client.MendeleyClient;
 import de.tudresden.slr.model.mendeley.api.model.MendeleyDocument;
 import de.tudresden.slr.model.mendeley.api.model.MendeleyFolder;
+import de.tudresden.slr.model.mendeley.synchronisation.WorkspaceBibTexEntry;
 import de.tudresden.slr.model.mendeley.util.MendeleyTreeLabelProvider;
 import de.tudresden.slr.model.mendeley.util.TreeContentProvider;
 
@@ -43,13 +44,16 @@ public class MSyncWizardFolderPage extends WizardPage {
 	
 	protected AdapterFactoryEditingDomain editingDomain;
 	
-	public MSyncWizardFolderPage() {
+	private WorkspaceBibTexEntry selectedBibTexEntry;
+	
+	public MSyncWizardFolderPage(WorkspaceBibTexEntry selectedBibTexEntry) {
 		super("FolderPage");
 		folders_str = "";
 		setTitle("Mendeley Folder Selection");
 		setDescription("Choose a Folder from your Mendeley Profile");
 		folder_list = new ArrayList();
 		isSelectionValidated = false;
+		this.selectedBibTexEntry = selectedBibTexEntry;
 		setPageComplete(false);
 	}
 
@@ -72,8 +76,23 @@ public class MSyncWizardFolderPage extends WizardPage {
 		treeViewer.setLabelProvider(new MendeleyTreeLabelProvider());
 		
         try {
+        	MendeleyFolder[] mendeleyFolders = mc.getMendeleyFolders();
         	// TreeViewer takes Array of MendeleyFolders
-			treeViewer.setInput(mc.getMendeleyFolders());
+        	if(selectedBibTexEntry != null) {
+        		MendeleyFolder selectedMendeleyFolder = selectedBibTexEntry.getMendeleyFolder();
+        		for(MendeleyFolder mf : mendeleyFolders) {
+        			if(mf.getId().equals(selectedMendeleyFolder.getId())) {
+        				MendeleyFolder[] selectedFolderArray = new MendeleyFolder[]{mf};
+        				treeViewer.setInput(selectedFolderArray);
+        				treeViewer.expandAll();
+        			}
+        		}
+        	}
+        	else {
+        		treeViewer.setInput(mendeleyFolders);
+        	}
+        	
+			
 		} catch (TokenMgrException e) {
 			e.printStackTrace();
 		}  

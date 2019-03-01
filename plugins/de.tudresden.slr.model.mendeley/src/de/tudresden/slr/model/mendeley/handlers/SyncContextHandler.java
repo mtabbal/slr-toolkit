@@ -1,5 +1,8 @@
 package de.tudresden.slr.model.mendeley.handlers;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -15,15 +18,21 @@ import org.eclipse.e4.core.internal.contexts.EclipseContext;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeSelection;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISources;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.progress.UIJob;
+import org.jbibtex.ParseException;
+import org.jbibtex.TokenMgrException;
+import org.omg.CORBA.WCharSeqHelper;
 
 import de.tudresden.slr.model.mendeley.api.client.MendeleyClient;
 import de.tudresden.slr.model.mendeley.synchronisation.WorkspaceBibTexEntry;
 import de.tudresden.slr.model.mendeley.synchronisation.WorkspaceManager;
+import de.tudresden.slr.model.mendeley.ui.MSyncWizard;
 import de.tudresden.slr.model.mendeley.util.MutexRule;
 
 /**
@@ -50,6 +59,8 @@ public class SyncContextHandler extends AbstractHandler {
 	 * A flag that returns if the user is logged into his Mendeley Profile
 	 */
 	private boolean loggedIn;
+	
+	private boolean isReady;
 	
 	@Override
 	public void setEnabled(Object evaluationContext) {
@@ -101,7 +112,9 @@ public class SyncContextHandler extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		loggedIn = false;
+		isReady = false;
 		
+		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event)
                 .getActivePage().getSelection();
 		if(selection instanceof TreeSelection) {
@@ -142,8 +155,23 @@ public class SyncContextHandler extends AbstractHandler {
 					            protected IStatus run(IProgressMonitor monitor) {
 					            	SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 					            	subMonitor.setTaskName("Synchronizing " + file.toString() + " with MendeleyFolder: " + entry.getMendeleyFolder().getName());
-					            	if(loggedIn)
-					            		wm.updateSyncFolder(entry, monitor);
+					            	if(loggedIn) {
+					            		/*
+					            		 * alternative update method:
+					            		 * 
+					            		 * wm.updateSyncFolder(entry, monitor);
+					            		 * 
+					            		 * used to automatically update synchronized Folder
+					            		 */
+										try {
+											mc.updateMendeleyFolders(monitor);
+										} catch (TokenMgrException | IOException | ParseException e) {
+											e.printStackTrace();
+										}
+										
+										
+					            		isReady = true;
+					            	}
 					            	else
 					            		return Status.CANCEL_STATUS;
 					            	
@@ -152,14 +180,36 @@ public class SyncContextHandler extends AbstractHandler {
 					            
 
 					        };
+					        
+					        UIJob job3 = new UIJob("Starting Mendeley UI Wizard") {
+					            @Override
+								public IStatus runInUIThread(IProgressMonitor monitor) {
+					            	// only executes if both previous job were successful
+					            	if(loggedIn & isReady) {
+					            		WizardDialog wizardDialog = new WizardDialog(window.getShell(),
+									            new MSyncWizard(file.getLocationURI(), entry));
+					            		wizardDialog.open();
+					            	}
+					            	else {
+					            		return Status.CANCEL_STATUS;
+					            	}
+					            	return Status.OK_STATUS;
+					            }
+					        };
 					        // a rule is instantiated to oppress parallel execution of jobs
 					        MutexRule rule = new MutexRule();
 					        job1.setRule(rule);
 					        job1.setUser(true);
 					        job2.setRule(rule);
 					        job2.setUser(true);
+					        
+					        job3.setRule(rule);
+					        
 					        job1.schedule();
 					        job2.schedule();
+					        job3.schedule();
+					        
+					        
 						}
 					}
 				}

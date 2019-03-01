@@ -118,6 +118,7 @@ public class WizardHandler extends AbstractHandler {
             	if(loggedIn & isReady) {
             		WizardDialog wizardDialog = new WizardDialog(window.getShell(),
 				            new MSyncWizard());
+            		wizardDialog.open();
 //			        if (wizardDialog.open() == Window.OK) {
 //			            
 //			        } else {

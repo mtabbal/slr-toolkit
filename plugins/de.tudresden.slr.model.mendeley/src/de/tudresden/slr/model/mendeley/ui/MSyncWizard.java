@@ -49,6 +49,8 @@ public class MSyncWizard extends Wizard {
 	private MendeleyClient mc;
     
 	private WorkspaceManager wm;
+	
+	private WorkspaceBibTexEntry selectedBibTexEntry;
     
 	/**
 	 * Flag to determin if the context Wizard or the common Wizard will be called
@@ -68,6 +70,7 @@ public class MSyncWizard extends Wizard {
         setNeedsProgressMonitor(true);
         mc = MendeleyClient.getInstance();
         wm = WorkspaceManager.getInstance();
+        selectedBibTexEntry = null;
         preSelected = false;
     }
     
@@ -82,6 +85,23 @@ public class MSyncWizard extends Wizard {
         mc = MendeleyClient.getInstance();
         wm = WorkspaceManager.getInstance();
         preSelected = true;
+        selectedBibTexEntry = null;
+        this.uri = uri;
+    }
+    
+    /**
+     * Constructor should be used when user directly selects an Bib-File from the Project Explorer
+     * that is already connected to a Mendeley Folder and needs to be synchronized
+     * 
+     * @param uri URI of the Bib-File that you want to synchronize
+     */
+    public MSyncWizard(URI uri, WorkspaceBibTexEntry entry) {
+        super();
+        setNeedsProgressMonitor(true);
+        mc = MendeleyClient.getInstance();
+        wm = WorkspaceManager.getInstance();
+        preSelected = true;
+        selectedBibTexEntry = entry;
         this.uri = uri;
     }
 
@@ -100,7 +120,7 @@ public class MSyncWizard extends Wizard {
     		zero = new MSyncWizardFilePage();
     	}
     	
-    	one = new MSyncWizardFolderPage();
+    	one = new MSyncWizardFolderPage(selectedBibTexEntry);
         two = new MSyncWizardOverviewPage();
         three = new MSyncWizardConflictPage();
         addPage(zero);
